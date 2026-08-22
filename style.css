@@ -1,247 +1,353 @@
+:root {
+    /* Global Font Family */
+    --font-primary: 'Roboto', Arial, sans-serif;
+
+    /* Global Offsets */
+    --offset-xs: 4px;
+    --offset-sm: 8px;
+    --offset-md: 16px;
+    --offset-lg: 24px;
+    --offset-xl: 32px;
+
+    /* Light Palette */
+    --bg-body: #f2f2f2;
+    --bg-card: #ffffff;
+    --bg-thumb: #eaeaea;
+    --border-color: #e0e0e0;
+    --border-thumb: #d0d0d0;
+    --text-primary: #111111;
+    --text-body: #333333;
+    --text-muted: #666666;
+    --text-subtle: #888888;
+    --accent-pink: #ff0056;
+    --btn-green: #00B54E;
+    --btn-green-hover: #009040;
+}
+
+/* Light Theme */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    font-family: var(--font-primary);
+    border-radius: 0 !important;
+}
+
+/* Sticky Footer */
+html {
+    height: 100%;
 }
 
 body {
-    background: #E3E3E3;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.4;
-    color: #1e1e1e;
-    padding: 2rem 1.5rem;
-}
-
-/* Main container */
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    background: #ffffff;
-    padding: 2rem 1.8rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border-radius: 0;
-}
-
-/* Header with logo */
-.page-header {
-    margin-bottom: 2.5rem;
-    border-bottom: 2px solid #dcdcdc;
-    padding-bottom: 0.75rem;
-}
-
-.site-logo {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Simple grid */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* Project card */
-.project-card {
-    background: #fff;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    background-color: var(--bg-body);
+    color: var(--text-body);
+    line-height: 1.5;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-/* Thumbnail area */
-.thumbnail {
-    background-color: #d9d9d9;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #5a5a5a;
-    font-size: 0.9rem;
-    font-weight: normal;
-    border-bottom: 1px solid #ebebeb;
-    overflow: hidden;
-}
-
-/* Style for images inside thumbnails */
-.thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Simple text */
-.card-content {
-    padding: 1rem 1rem 1.2rem 1rem;
-    background: #ffffff;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Title */
-.project-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: #191919;
-    line-height: 1.3;
-}
-
-/* Year */
-.project-year {
-    font-size: 0.8rem;
-    color: #BABABA;
-    font-weight: normal;
-    margin-bottom: 0.6rem;
-    letter-spacing: 0.3px;
-}
-
-.project-description {
-    font-size: 0.95rem;
-    color: #191919;
-    line-height: 1.45;
-    margin: 0;
-    margin-bottom: 0.75rem;
-}
-
-/* Tags container */
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-/* Individual tag */
-.tag {
-    display: inline-block;
-    background-color: #f0f0f0;
-    border: 1px solid #dcdcdc;
-    color: #555555;
-    font-size: 0.7rem;
-    font-weight: 500;
-    padding: 0.2rem 0.6rem;
-    letter-spacing: 0.2px;
-    text-transform: lowercase;
-}
-
-/* Download button */
-.download-btn {
-    color: #00A2FF;
-    font-size: 0.9rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: inline-block;
-    width: fit-content;
-    padding: 0;
+a {
+    color: var(--text-primary);
     text-decoration: none;
 }
 
-.download-btn:hover {
-    opacity: 0.9;
+/* Header */
+header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--offset-md) var(--offset-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Download wrapper */
-.download-wrapper {
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo {
+    height: 48px;
+    width: auto;
+    display: block;
+}
+
+nav a {
+    margin-left: var(--offset-md);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 700;
+    padding: var(--offset-xs) var(--offset-sm);
+    border-bottom: 2px solid transparent;
+}
+
+nav a:hover, nav a.active {
+    color: var(--accent-pink);
+    border-bottom: 2px solid var(--accent-pink);
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: var(--offset-xl) auto;
+    padding: 0 var(--offset-md);
+    width: 100%;
+    flex: 1;
+}
+
+/* Featured Showcase */
+.featured-hero {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: var(--offset-md);
+    display: flex;
+    gap: var(--offset-lg);
+    margin-bottom: var(--offset-xl);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.featured-thumb {
+    width: 320px;
+    height: 180px;
+    background-color: var(--bg-thumb);
+    border: 1px solid var(--border-thumb);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-subtle);
+    font-size: 12px;
+    text-align: center;
+}
+
+.featured-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.spotlight-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-pink);
+    letter-spacing: 0.5px;
+}
+
+.featured-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: var(--offset-xs) 0;
+}
+
+.featured-desc {
+    font-size: 12px;
+    color: #555555;
+}
+
+.featured-action {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    margin-top: var(--offset-md);
 }
 
-/* Download counter */
-.download-count {
-    color: #BABABA;
-    font-size: 0.85rem;
-    font-weight: normal;
-    display: inline-block;
+.featured-price {
+    font-size: 16px;
+    color: var(--accent-pink);
 }
 
-/* In Development / Cancelled text */
-.in-development {
-    color: #888888;
-    font-size: 0.9rem;
-    font-weight: 400;
-    font-style: italic;
-    display: inline-block;
-    width: fit-content;
-}
-
-/* Social section */
-.social-section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid #dcdcdc;
+/* Filter Header Section */
+.filter-header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--offset-xs);
+    margin-bottom: var(--offset-lg);
+}
+
+.page-title-clean {
+    font-size: 16px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: var(--offset-xs);
+}
+
+.filter-tabs .tab {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 2px 8px;
+    border: 1px solid transparent;
+}
+
+.filter-tabs .tab:hover, .filter-tabs .tab.active {
+    color: var(--text-primary);
+    border-color: var(--border-color);
+    background-color: var(--bg-card);
+}
+
+/* Vertical Game List */
+.game-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--offset-md);
+}
+
+.game-row {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: var(--offset-md);
+    display: flex;
+    gap: var(--offset-lg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Thumbnail */
+.game-thumb {
+    width: 220px;
+    height: 125px;
+    background-color: var(--bg-thumb);
+    border: 1px solid var(--border-thumb);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+    color: var(--text-subtle);
+    font-size: 12px;
 }
 
-/* Social button styles */
-.social-btn {
+.game-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--offset-sm);
+}
+
+.game-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Status Tags */
+.status-tag {
+    font-size: 12px;
+    padding: 2px 6px;
+    margin-left: var(--offset-xs);
     display: inline-block;
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 0.6rem 1.5rem;
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
+    vertical-align: middle;
+    background-color: #eee;
+    color: var(--text-muted);
 }
 
-.social-btn:hover {
-    opacity: 0.9;
+.status-tag.released {
+    background-color: #e8f5e9;
+    color: #2e7d32;
 }
 
-/* YouTube button */
-.youtube-btn {
-    background-color: #E12219;
+.status-tag.web {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.status-tag.demo {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+.status-tag.in-development {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.price-badge {
+    color: var(--accent-pink);
+    font-size: 12px;
+    padding: var(--offset-xs) var(--offset-sm);
+}
+
+.game-description {
+    font-size: 12px;
+    color: #555555;
+    margin-top: var(--offset-sm);
+}
+
+.game-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--offset-md);
+}
+
+/* Platform Metadata */
+.platform-list {
+    font-size: 12px;
+    color: var(--text-subtle);
+}
+
+.btn-play {
+    background-color: var(--btn-green);
     color: #ffffff;
+    padding: var(--offset-sm) var(--offset-md);
+    font-size: 12px;
+    text-transform: uppercase;
+    display: inline-block;
 }
 
-/* GitHub button */
-.github-btn {
-    background-color: #2b3137;
-    color: #ffffff;
+.btn-play:hover {
+    background-color: var(--btn-green-hover);
 }
 
-/* Discord button */
-.discord-btn {
-    background-color: #7289DA;
-    color: #ffffff;
+.btn-play.disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
-/* small spacing adjustments */
-hr {
-    display: none;
-}
-
-.project-card {
-    border-radius: 0px;
-}
-
-.thumbnail {
-    border-radius: 0px;
-}
-
-@media (max-width: 650px) {
-    body {
-        padding: 1rem;
+/* Responsive Scaling */
+@media (max-width: 600px) {
+    .featured-hero {
+        flex-direction: column;
     }
-    .container {
-        padding: 1.2rem;
+    .featured-thumb {
+        width: 100%;
+        height: 160px;
     }
-    .projects-grid {
-        gap: 1.5rem;
+    .game-row {
+        flex-direction: column;
+        gap: var(--offset-md);
     }
-    
-    .social-btn {
-        font-size: 0.85rem;
-        padding: 0.5rem 1rem;
+    .game-thumb {
+        width: 100%;
+        height: 160px;
     }
+    .submit-callout {
+        flex-direction: column;
+        gap: var(--offset-md);
+        text-align: center;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: var(--offset-xl) 0;
+    color: var(--text-subtle);
+    font-size: 12px;
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--offset-xl);
 }

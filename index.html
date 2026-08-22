@@ -3,261 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quaria's Projects</title>
-    <link rel="icon" type="image/png" href="images/WebIcon.png">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <title>Q-Raster Games | Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Firebase SDKs -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
-        import { getFirestore, doc, updateDoc, increment, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-        
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyB2sZ8xynQHwPx9OGcLPkugBhWAeRSSx1I",
-            authDomain: "quarywebsite-8119a.firebaseapp.com",
-            projectId: "quarywebsite-8119a",
-            storageBucket: "quarywebsite-8119a.firebasestorage.app",
-            messagingSenderId: "1095469040951",
-            appId: "1:1095469040951:web:9f8ba1d780a3b3b5f7c6b2",
-            measurementId: "G-TGNES33KFE"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const db = getFirestore(app);
-
-        // Function to increment download count
-        async function incrementDownloadCount(projectId)
-        {
-            const docRef = doc(db, "GameDownloads", projectId);
-            try
-            {
-                await updateDoc(docRef,
-                {
-                    count: increment(1)
-                });
-                console.log(`Download count for ${projectId} incremented`);
-                // Fetch and update the displayed count
-                await updateDisplayCount(projectId);
-            }
-            catch (error)
-            {
-                if (error.code === 'not-found')
-                {
-                    await setDoc(docRef, { count: 1 });
-                    console.log(`New Download Counter created for ${projectId} (count = 1)`);
-                    await updateDisplayCount(projectId);
-                }
-                else
-                {
-                    console.error("Error updating download count:", error);
-                }
-            }
-        }
-        
-        // Function to fetch and display download count
-        async function updateDisplayCount(projectId)
-        {
-            const docRef = doc(db, "GameDownloads", projectId);
-            try
-            {
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists())
-                {
-                    const count = docSnap.data().count;
-                    const countElement = document.getElementById(`count-${projectId}`);
-                    if (countElement)
-                    {
-                        countElement.textContent = count;
-                    }
-                }
-            }
-            catch (error)
-            {
-                console.error("Error fetching count:", error);
-            }
-        }
-        
-        // Function to load all initial counts
-        async function loadAllCounts()
-        {
-            const projectCards = document.querySelectorAll('.project-card');
-            for (const card of projectCards)
-            {
-                const projectId = card.getAttribute('data-project-id');
-                if (projectId)
-                {
-                    await updateDisplayCount(projectId);
-                }
-            }
-        }
-        
-        // Wait for DOM to load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadAllCounts();
-            
-            const downloadBtns = document.querySelectorAll('.download-btn');
-            
-            downloadBtns.forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const projectCard = btn.closest('.project-card');
-                    let projectId = projectCard?.getAttribute('data-project-id');
-                    
-                    if (projectId)
-                    {
-                        incrementDownloadCount(projectId).catch(console.error);
-                    }
-                });
-            });
-        });
-    </script>
 </head>
 <body>
-<div class="container">
-    <div class="page-header">
-        <img src="images/logo.png" alt="Quaria's Logo" class="site-logo">
+
+    <header>
+        <div class="brand">
+            <a href="index.html">
+                <img src="assets/logo.png" class="brand-logo" alt="Q-Raster Games">
+            </a>
+        </div>
+        <nav>
+            <a href="index.html" class="active">GAMES</a>
+            <a href="about.html">ABOUT Q-RASTER GAMES</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div id="featured-container"></div>
+
+        <div class="filter-header">
+            <div class="page-title-clean">All Projects</div>
+            <div class="filter-tabs" id="filter-tabs">
+                <a href="#" class="tab active" data-category="ALL">ALL</a>
+                <a href="#" class="tab" data-category="DESKTOP">DESKTOP</a>
+                <a href="#" class="tab" data-category="MOBILE">MOBILE</a>
+                <a href="#" class="tab" data-category="WEB">WEB</a>
+                <a href="#" class="tab" data-category="DEMOS">DEMOS</a>
+            </div>
+        </div>
+
+        <div class="game-list" id="games-container"></div>
     </div>
 
-    <div class="projects-grid" id="projectsGrid">
-        <!-- Freedom -->
-        <div class="project-card" data-project-id="freedom">
-            <div class="thumbnail">
-                <img src="images/thumbnail_freedom.png" alt="FREEDOM thumbnail">
-            </div>
-            <div class="card-content">
-                <div class="project-title">FREEDOM</div>
-                <div class="project-year">2023</div>
-                <div class="project-description">You were a prisoner, and now a test subject. You dream of making your way out of this terrific place.</div>
-                <div class="project-tags">
-                    <span class="tag">RPG Maker</span>
-                    <span class="tag">Puzzle</span>
-                    <span class="tag">2D</span>
-                </div>
-                <div class="download-wrapper">
-                    <a href="https://drive.google.com/uc?export=download&id=1VhlaCME4YoYQk-6qaU9OLCOPFiuwyByw" target="_blank" class="download-btn">Download</a>
-                    <span class="download-count" id="count-freedom">0</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- The Little Story -->
-        <div class="project-card" data-project-id="the_little_story">
-            <div class="thumbnail">
-                <img src="images/thumbnail_tls.png" alt="The Little Story thumbnail">
-            </div>
-            <div class="card-content">
-                <div class="project-title">The Little Story</div>
-                <div class="project-year">2024</div>
-                <div class="project-description">This story is so little, it'll blow your mind 🤯. Sphiri on his way to rescue a Calico Cat. Evil Blue Bun must stop him.</div>
-                <div class="project-tags">
-                    <span class="tag">2D</span>
-                    <span class="tag">Top-Down</span>
-                    <span class="tag">Beauty</span>
-                </div>
-                <div class="download-wrapper">
-                    <a href="https://drive.google.com/uc?export=download&id=1hVdREscsxM8b_7fq6s-nYz56IJZOUJHI" target="_blank" class="download-btn">Download</a>
-                    <span class="download-count" id="count-the_little_story">0</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- GEOMETRICAL DREAMS -->
-        <div class="project-card" data-project-id="geometrical_dreams">
-            <div class="thumbnail">
-                <img src="images/thumbnail_gd.png" alt="Geometrical Dreams thumbnail">
-            </div>
-            <div class="card-content">
-                <div class="project-title">Geometrical Dreams</div>
-                <div class="project-year">2024</div>
-                <div class="project-description">Get inside your friends, and eliminate their nightmares from within. Some are easy to defeat, and some are not.</div>
-                <div class="project-tags">
-                    <span class="tag">2D</span>
-                    <span class="tag">Top-Down</span>
-                    <span class="tag">RPG Maker</span>
-                </div>
-                <div class="download-wrapper">
-                    <a href="https://drive.google.com/uc?export=download&id=113wSe821nAS1P_qSFHB0BxioP0ar5rMo" target="_blank" class="download-btn">Download</a>
-                    <span class="download-count" id="count-geometrical_dreams">0</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Throw Gal -->
-        <div class="project-card" data-project-id="throw_gal">
-            <div class="thumbnail">
-                <img src="images/thumbnail_throwgal.png" alt="Throw Gal thumbnail">
-            </div>
-            <div class="card-content">
-                <div class="project-title">Throw Gal</div>
-                <div class="project-year">2026</div>
-                <div class="project-description">This is a fan-game, which is continuation of Throw Bro. You have to make your way back to Throw Island.</div>
-                <div class="project-tags">
-                    <span class="tag">2D</span>
-                    <span class="tag">Platformer</span>
-                    <span class="tag">Fan-Game</span>
-                </div>
-                <div class="download-wrapper">
-                    <a href="https://drive.google.com/uc?export=download&id=1ABwHMX0Eb04hzDElNTrDw9CH5uPz3oor" target="_blank" class="download-btn">Download</a>
-                    <span class="download-count" id="count-throw_gal">0</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- UNWORDED - CANCELLED -->
-        <div class="project-card" data-project-id="unworded">
-            <div class="thumbnail">
-                <img src="images/thumbnail_unworded_NO.png" alt="UNWORDED thumbnail">
-            </div>
-            <div class="card-content">
-                <div class="project-title">UNWORDED</div>
-                <div class="project-year">2026</div>
-                <div class="project-description">A mysterious book had appeared in your room. You must stop The Entity from infecting and destroying worlds.</div>
-                <div class="project-tags">
-                    <span class="tag">RPG</span>
-                    <span class="tag">Top-Down</span>
-                    <span class="tag">2D</span>
-                </div>
-                <span class="in-development">Cancelled</span>
-            </div>
-        </div>
+    <footer>
+        &copy; 2026 Q-Raster Games. This website uses Cloudflare Pages.
+    </footer>
 
-        <!-- NTC -->
-        <div class="project-card" data-project-id="ntc">
-            <div class="thumbnail">
-                <img src="images/thumbnail_ntc.png" alt="NTC thumbnail">
-            </div>
-            <div class="card-content">
-                <div class="project-title">NTC ( NeoTech Corp. )</div>
-                <div class="project-year">2026</div>
-                <div class="project-description">A granny-like game that takes place on a crashed spaceship. Your goal is to repair the escape pod and return to NTC HQ.</div>
-                <div class="project-tags">
-                    <span class="tag">Horror</span>
-                    <span class="tag">Puzzle</span>
-                    <span class="tag">First-Person</span>
-                    <span class="tag">Survival</span>
-                </div>
-                <div class="download-wrapper">
-                    <a href="https://drive.google.com/uc?export=download&id=1srONPN1pvhjAEYmVlCfcyVhYRB6kzlMZ" target="_blank" class="download-btn">Download</a>
-                    <span class="download-count" id="count-ntc">0</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script src="games.js"></script>
 
-    <div class="social-section">
-        <a href="https://www.youtube.com/@Quarynet" target="_blank" class="social-btn youtube-btn">YouTube Channel</a>
-        <a href="https://github.com/Quarynet" target="_blank" class="social-btn github-btn">GitHub Page</a>
-        <a href="https://discord.gg/zuWfHppTh4" target="_blank" class="social-btn discord-btn">Discord Server</a>
-    </div>
-</div>
+    <script>
+        const featuredContainer = document.getElementById('featured-container');
+        const gamesContainer = document.getElementById('games-container');
+        const filterTabs = document.getElementById('filter-tabs');
 
-<script>
-    const grid = document.getElementById('projectsGrid');
-    const cards = Array.from(grid.children);
-    cards.reverse().forEach(card => grid.appendChild(card));
-</script>
+        const featuredGame = gameData.find(g => g.isFeatured) || gameData[0];
+        
+        function renderThumb(src, defaultText) {
+            return src 
+                ? `<img src="${src}" alt="Cover" style="width:100%; height:100%; object-fit:cover;">`
+                : defaultText;
+        }
+
+        featuredContainer.innerHTML = `
+            <div class="featured-hero">
+                <div class="featured-thumb">
+                    ${renderThumb(featuredGame.heroBanner || featuredGame.thumb, '[ FEATURED SHOWCASE COVER 400x220 ]')}
+                </div>
+                <div class="featured-details">
+                    <div>
+                        <span class="spotlight-label">FEATURED GAME &bull; ${featuredGame.year}</span>
+                        <h2 class="featured-title">${featuredGame.title}</h2>
+                        <p class="featured-desc">${featuredGame.descHero || featuredGame.descList}</p>
+                    </div>
+                    <div class="featured-action">
+                        <span class="featured-price ${featuredGame.priceClass}">${featuredGame.price}</span>
+                        <a href="gamepage.html?id=${featuredGame.id}" class="btn-play">${featuredGame.btnTextHero || featuredGame.btnTextList}</a>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        function renderGames(categoryFilter = 'ALL') {
+            const filteredGames = categoryFilter === 'ALL' 
+                ? gameData 
+                : gameData.filter(game => game.categories && game.categories.includes(categoryFilter));
+
+            if (filteredGames.length === 0) {
+                gamesContainer.innerHTML = `
+                    <div style="padding: 32px; text-align: center; color: var(--text-subtle); background-color: var(--bg-card); border: 1px solid var(--border-color);">
+                        Nothing Found.
+                    </div>
+                `;
+                return;
+            }
+
+            gamesContainer.innerHTML = filteredGames.map(game => `
+                <div class="game-row">
+                    <div class="game-thumb">
+                        ${renderThumb(game.thumb, '[ 220 x 125 COVER ]')}
+                    </div>
+                    <div class="game-details">
+                        <div>
+                            <div class="game-header">
+                                <div>
+                                    <span class="game-title">${game.title}</span>
+                                    <span class="status-tag ${game.tagClass}">${game.tagText}</span>
+                                </div>
+                                <span class="price-badge ${game.priceClass}">${game.price}</span>
+                            </div>
+                            <div class="game-description">${game.descList}</div>
+                        </div>
+                        <div class="game-footer">
+                            <span class="platform-list">${game.year} &bull; ${game.platforms}</span>
+                            <a href="gamepage.html?id=${game.id}" class="btn-play">${game.btnTextList}</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        filterTabs.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tab')) {
+                e.preventDefault();
+                
+                document.querySelectorAll('.filter-tabs .tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+
+                const category = e.target.getAttribute('data-category');
+                renderGames(category);
+            }
+        });
+
+        renderGames('ALL');
+    </script>
 </body>
 </html>

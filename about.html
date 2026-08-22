@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <title>Q-Raster Games | About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: var(--offset-xl);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: var(--offset-lg);
+        }
+
+        .about-header {
+            display: flex;
+            align-items: center;
+            gap: var(--offset-lg);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: var(--offset-lg);
+        }
+
+        .about-logo {
+            width: 140px;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        .about-title {
+            font-size: 24px;
+            color: var(--text-primary);
+        }
+
+        .about-subtitle {
+            font-size: 14px;
+            color: var(--accent-pink);
+            text-transform: uppercase;
+        }
+
+        .about-section-title {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: var(--offset-sm);
+        }
+
+        .about-body p {
+            font-size: 12px;
+            color: var(--text-body);
+            line-height: 1.6;
+            margin-bottom: var(--offset-md);
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--offset-xs);
+            font-size: 13px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: var(--offset-sm);
+        }
+
+        .contact-label {
+            color: var(--text-muted);
+            width: 128px;
+        }
+
+        .contact-value a {
+            color: var(--accent-pink);
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .about-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <a href="index.html">
+                <img src="assets/logo.png" class="brand-logo" alt="Q-Raster Games">
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">GAMES</a>
+            <a href="about.html" class="active">ABOUT Q-RASTER GAMES</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="about-card">
+            <div class="about-header">
+                <img src="assets/logo_alt.png" alt="Q-Raster Games Alt Logo" class="about-logo" onerror="this.onerror=null; this.src='assets/logo.png';">
+                <div>
+                    <h1 class="about-title">ABOUT Q-RASTER GAMES</h1>
+                    <span class="about-subtitle">Indie Game Developer</span>
+                </div>
+            </div>
+
+            <div class="about-body">
+                <div class="about-section-title">Description</div>
+                <p>
+                    Q-Raster Games is a one person game development studio dedicated to creating experiences across Desktop and Mobile platforms.
+                </p>
+            </div>
+
+            <div class="about-contact">
+                <div class="about-section-title">Contacts</div>
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <span class="contact-label">YouTube:</span>
+                        <span class="contact-value"><a href="https://www.youtube.com/channel/UCWLQ-W850TKo_BsdBlCBLwQ">@Q-RasterGames</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Personal YouTube:</span>
+                        <span class="contact-value"><a href="https://www.youtube.com/@Quarynet">@Quarynet</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Q-Raster Games. This website uses Cloudflare Pages.
+    </footer>
+
+</body>
+</html>
