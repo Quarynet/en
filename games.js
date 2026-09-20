@@ -15,8 +15,8 @@ const gameData = [
         btnTextHero: "View Game Page",
         isFeatured: true,
         isAvailable: false,
-        thumb: "assets/games/meowrph/temp_thumbnail.png",
-        heroBanner: "assets/games/meowrph/temp_thumbnail.png",
+        thumb: "assets/games/meowrph/thumbnail.png",
+        heroBanner: "assets/games/meowrph/thumbnail.png",
         downloads: [
             { name: "Windows", url: "#download-windows" },
             { name: "Android", url: "#download-android" }
